@@ -1,0 +1,74 @@
+[
+    {
+      "fromAccount": "1234567890",
+      "toAccount": "0987654321",
+      "transactionId": "TRX001",
+      "amount": 250.0,
+      "transactionType": "Credit",
+      "date": "2025-03-03"
+    },
+    {
+      "fromAccount": "1234567890",
+      "toAccount": "1234509876",
+      "transactionId": "TRX002",
+      "amount": 150.5,
+      "transactionType": "Debit",
+      "date": "2025-03-02"
+    },
+    {
+      "fromAccount": "2345678901",
+      "toAccount": "0987654321",
+      "transactionId": "TRX003",
+      "amount": 700.0,
+      "transactionType": "Credit",
+      "date": "2025-03-01"
+    },
+    {
+      "fromAccount": "3456789012",
+      "toAccount": "2345678901",
+      "transactionId": "TRX004",
+      "amount": 450.0,
+      "transactionType": "Debit",
+      "date": "2025-03-01"
+    },
+    {
+      "fromAccount": "4567890123",
+      "toAccount": "3456789012",
+      "transactionId": "TRX005",
+      "amount": 900.0,
+      "transactionType": "Credit",
+      "date": "2025-02-28"
+    },
+    {
+      "fromAccount": "5678901234",
+      "toAccount": "4567890123",
+      "transactionId": "TRX006",
+      "amount": 120.0,
+      "transactionType": "Debit",
+      "date": "2025-02-27"
+    },
+    {
+      "fromAccount": "6789012345",
+      "toAccount": "5678901234",
+      "transactionId": "TRX007",
+      "amount": 1000.0,
+      "transactionType": "Credit",
+      "date": "2025-02-26"
+    },
+    {
+      "fromAccount": "7890123456",
+      "toAccount": "6789012345",
+      "transactionId": "TRX008",
+      "amount": 300.0,
+      "transactionType": "Debit",
+      "date": "2025-02-25"
+    },
+    {
+      "fromAccount": "8901234567",
+      "toAccount": "7890123456",
+      "transactionId": "TRX009",
+      "amount": 250.0,
+      "transactionType": "Credit",
+      "date": "2025-02-24"
+    }
+]
