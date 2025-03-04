@@ -1,59 +1,32 @@
-import React from 'react'
-import BalanceCard from './BalanceCard';
-import TransactionTable from './Table/TransactionHistory';
-import { useAuth } from '../context/AuthContext';
-import { redirect } from 'react-router';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router';
-import { useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import BalanceCard from "./BalanceCard";
+import TransactionTable from "./Table/TransactionHistory";
+import { useAuth } from "../context/AuthContext";
+import { useEffect, useState } from "react";
+import { redirect } from "react-router";
+import { useNavigate } from "react-router";
+
 const Dashboard = () => {
-  const { isAuthenticated,setIsAuthenticated,setUser,user } = useAuth();
-  const navigate = useNavigate()
-  console.log("isAuthenticated", isAuthenticated)
-  // if (!isAuthenticated) {
-  //   return (
-  //     <>
+  const { isAuthenticated, setIsAuthenticated, setUser, user, loading } =
+    useAuth();
+  const navigate = useNavigate();
+  console.log("isAuthenticated dashboard", isAuthenticated);
+  useEffect(() => {
+    if (!loading && !isAuthenticated) {
+      navigate("/"); // Redirect to login if not authenticated
+    }
+  }, [isAuthenticated, navigate, user, loading]);
 
-  //       <Link to="/login"><button className='text-center flex justify-center px-4 py-2 cursor-pointer bg-blue-600'>Please login to Continue </button></Link>
-  //     </>
-  //   )
+  if (!loading && !isAuthenticated) {
+    return null; // Prevent rendering the dashboard while redirecting
+  }
 
-  // }
-
-   const getUserDetails = async (email) => {
-          const Url = `http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/getUser/${email}`;
-          
-          try {
-              const result = await axios.get(Url);
-              console.log(result.data);
-              setUser(result.data);
-              setIsAuthenticated(true);
-              return result.data;
-          } catch (err) {
-              console.log(err, "Error occurred while calling the API");
-          }
-      };
-  
-      console.log(isAuthenticated)
-  
-      useEffect(() => {
-          const fetchUserDetails = async () => {
-              const email = localStorage.getItem("email");
-              console.log(email, ": Email Found in LocalStorage");
-              if (email) {
-                  await getUserDetails(email);
-              }
-          };
-          fetchUserDetails();
-      }, []);
-  
   return (
     <>
       <BalanceCard />
       <TransactionTable />
     </>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;

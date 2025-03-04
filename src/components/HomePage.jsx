@@ -7,21 +7,28 @@ const HomePage = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      
-      <section className="text-center py-20">
+      <section className="text-center py-10">
         <h1 className="text-5xl font-bold mb-4">Welcome to Bank of Bengal </h1>
-        <p className="text-lg mb-6">Your Trust, Our Commitment. Banking Made Simple!</p>
-        
+        <p className="text-lg mb-6">
+          Your Trust, Our Commitment. Banking Made Simple!
+        </p>
       </section>
 
       {/* Banking Features */}
-      <section className="p-10">
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#11b67a]">What We Offer</h2>
+      <section className="p-2">
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#11b67a]">
+          What We Offer
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {["Online Banking", "24/7 Support", "Easy Loans"].map((feature) => (
-            <div key={feature} className="bg-white shadow-lg rounded-lg p-6 text-center">
+            <div
+              key={feature}
+              className="bg-white shadow-lg rounded-lg p-6 text-center"
+            >
               <h3 className="text-xl font-semibold mb-3">{feature}</h3>
-              <p className="text-gray-600">Experience seamless banking anytime, anywhere!</p>
+              <p className="text-gray-600">
+                Experience seamless banking anytime, anywhere!
+              </p>
             </div>
           ))}
         </div>
@@ -32,9 +39,15 @@ const HomePage = () => {
         <section className="bg-blue-100 p-10 text-center">
           <h2 className="text-3xl font-bold mb-4">Quick Services</h2>
           <div className="flex flex-wrap justify-center gap-6">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Check Balance</button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Apply for Loan</button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Transfer Money</button>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              Check Balance
+            </button>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              Apply for Loan
+            </button>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              Transfer Money
+            </button>
           </div>
         </section>
       )}
