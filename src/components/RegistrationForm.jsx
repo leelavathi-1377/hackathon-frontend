@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
-
+import { parseUserData } from "../utils/parser";
+import axios from "axios";
+import { useNavigate } from "react-router";
 const RegistrationForm = () => {
   const {
     register,
@@ -8,8 +10,26 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const navigate=useNavigate()
+
+  
+  const onSubmit = async (data) => {
+    console.log("data", data);
+    const registerPayload=parseUserData(data);
+    try {
+      const response = await axios.post(
+        "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/register",
+        registerPayload
+      );
+      console.log("response", response.data);
+      if (response.data) {
+      
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Registration failed", error);
+      
+    }
   };
 
   return (
@@ -32,7 +52,7 @@ const RegistrationForm = () => {
                 />
               </div>
               <div>
-                <label className="font-semibold">Date</label>
+                <label className="font-semibold">Date Of Birth</label>
                 <input
                   className="border p-2 rounded w-full mt-1"
                   type="date"
@@ -43,7 +63,7 @@ const RegistrationForm = () => {
                 <label className="font-semibold">Gender</label>
                 <select
                   className="border p-2 rounded w-full mt-1"
-                  {...register("personalInformation.gender", { required: true })}
+                  {...register("personalInformation.gender")}
                 >
                   <option>Male</option>
                   <option>Female</option>
@@ -55,19 +75,8 @@ const RegistrationForm = () => {
                 <input
                   className="border p-2 rounded w-full mt-1"
                   placeholder="Nationality"
-                  {...register("personalInformation.nationality", { required: true })}
+                  {...register("personalInformation.nationality")}
                 />
-              </div>
-              <div>
-                <label className="font-semibold">Marital Status</label>
-                <select
-                  className="border p-2 rounded w-full mt-1"
-                  {...register("personalInformation.maritalStatus", { required: true })}
-                >
-                  <option>Single</option>
-                  <option>Married</option>
-                  <option>Divorced</option>
-                </select>
               </div>
             </div>
           </section>
@@ -95,19 +104,43 @@ const RegistrationForm = () => {
                 />
               </div>
               <div>
-                <label className="font-semibold">Residential Address</label>
+                <label className="font-semibold">State</label>
                 <input
                   className="border p-2 rounded w-full"
-                  placeholder="Residential Address"
-                  {...register("contactInformation.residentialAddress", { required: true })}
+                  placeholder="State"
+                  {...register("contactInformation.state", { required: true })}
                 />
               </div>
               <div>
-                <label className="font-semibold">Permanent Address</label>
+                <label className="font-semibold">City</label>
                 <input
                   className="border p-2 rounded w-full"
-                  placeholder="Permanent Address"
-                  {...register("contactInformation.permanentAddress", { required: true })}
+                  placeholder="City"
+                  {...register("contactInformation.city", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="font-semibold">Country</label>
+                <input
+                  className="border p-2 rounded w-full"
+                  placeholder="country"
+                  {...register("contactInformation.country", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="font-semibold">Street</label>
+                <input
+                  className="border p-2 rounded w-full"
+                  placeholder="street"
+                  {...register("contactInformation.street", { required: true })}
+                />
+              </div>
+              <div>
+                <label className="font-semibold">ZipCode</label>
+                <input
+                  className="border p-2 rounded w-full"
+                  placeholder="ZipCode"
+                  {...register("contactInformation.zipcode", { required: true })}
                 />
               </div>
             </div>
@@ -129,21 +162,15 @@ const RegistrationForm = () => {
                 </select>
               </div>
               <div>
-                <label className="font-semibold">Nominee Name</label>
+                <label className="font-semibold">Account Opening Balance</label>
                 <input
                   className="border p-2 rounded w-full"
-                  placeholder="Nominee Name"
-                  {...register("accountDetails.Nominee_name", { required: true })}
+                  placeholder="Initial Balance"
+                  {...register("accountDetails.initialBalance", { required: true })}
                 />
+               
               </div>
-              <div>
-                <label className="font-semibold">Nominee Contact No</label>
-                <input
-                  className="border p-2 rounded w-full"
-                  placeholder="Nominee Contact No"
-                  {...register("accountDetails.Nominee_name", { required: true })}
-                />
-              </div>
+              
             </div>
           </section>
 
@@ -177,15 +204,7 @@ const RegistrationForm = () => {
                   {...register("security.confirmPassword", { required: true })}
                 />
               </div>
-              <div>
-                <label className="font-semibold">Transaction PIN</label>
-                <input
-                  className="border p-2 rounded w-full"
-                  type="password"
-                  placeholder="Transaction PIN"
-                  {...register("security.transactionPin", { required: true })}
-                />
-              </div>
+             
             </div>
           </section>
 

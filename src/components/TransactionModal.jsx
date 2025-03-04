@@ -1,5 +1,8 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import axios from "axios";
+import { useAuth } from "../context/AuthContext";
+import { parseTransferData } from "../utils/parser";
 export const TransactionModal = ({ isOpen, onClose }) => {
   const {
     register,
@@ -8,13 +11,35 @@ export const TransactionModal = ({ isOpen, onClose }) => {
     formState: { errors },
   } = useForm();
 
+  const navigate=useNavigate();
+  const {user}=useAuth();
+
+  const saveTranferDetails = async(data) => {
+
+    const transferPayload=parseTransferData(data)
+    try {
+      const response = await axios.post(
+        "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/transactions/transfer",
+        {...transferPayload,fromAccountId:user.accountNumber}
+      );
+      console.log("response", response.data);
+      if (response.status === 200) {
+        alert("Transfer Successful");
+        // navigate("/dashboard");
+        onClose()
+      }
+    } catch (error) {
+      console.error("Transfer failed", error);
+      alert("Transfer failed");
+    }
+  }
 
 
   return (
     <div className="fixed inset-0 w-full flex items-center justify-center z-50 bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-[40%]">
         <h2 className="text-xl text-center font-semibold mb-4">Transfer Money</h2>
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-[80%] mx-auto">
+        <form onSubmit={handleSubmit(saveTranferDetails)} className="space-y-4 max-w-[80%] mx-auto">
           <div>
             <label className="block text-sm font-medium">Country Id</label>
             <input

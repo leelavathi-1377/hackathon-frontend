@@ -33,8 +33,6 @@ const TransactionTable = () => {
                                     >
                                         <td className="py-4 px-6">{transaction.transactionId}</td>
                                     </Link>
-
-
                                     <td className="py-4 px-6 font-bold text-blue-600">
                                         ${transaction.amount}
                                     </td>

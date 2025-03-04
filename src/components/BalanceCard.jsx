@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import TransactionModal from "./TransactionModal";
+import { useAuth } from "../context/AuthContext";
 const BalanceCard = () => {
   const [isModalOpen,setIsModalOpen]=useState(false);
+  const {user}=useAuth();
+  console.log('user',user)
+  // console.log(user.accountNumber, "LLLLLLLLLLLLLLLLLLLL")
 
   const onClose=()=>{
     setIsModalOpen(false)
+  }
+  if(!user){
+    return ;
   }
   return (
     <>
@@ -13,12 +20,12 @@ const BalanceCard = () => {
         <h2 className="text-black text-center font-bold text-2xl">Account Details</h2>
         <div className="text-left ml-2">
          
-          <p className="text-2xl text-gray-500">Account No: <span className="font-medium">1235*******</span></p>
+          <p className="text-2xl text-gray-500">Account No: <span className="font-medium">{String(user?.accountNumber).slice(0, 5)+'*'.repeat(6)}</span></p>
           <p className="text-2xl  text-gray-500">Account Type: <span className="font-medium">Saving</span></p>
         </div>
         
         <div className="text-center py-4 bg-white  text-[#11b67a]">
-          <h1 className="text-xl font-bold">Current Balance  <span className="text-3xl font-medium">$40.5</span></h1>
+          <h1 className="text-xl font-bold">Current Balance  <span className="text-3xl font-medium">{user?.balance}</span></h1>
          
         </div>
         

@@ -5,11 +5,12 @@ import { BankContext } from "../context/BankContext";
 import { Link } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useLocation } from "react-router";
+
 const HeaderMenu = () => {
 
   const location = useLocation()
 
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated,user } = useAuth();
 
   const showLogin = !isAuthenticated && location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "/dashboard";
   const showLogout=location.pathname=="/dashboard"
@@ -22,7 +23,7 @@ const HeaderMenu = () => {
           <h2 className="text-white text-4xl p-4">Bank of Bengal</h2>
         </div>
         <div>
-          <h3 className="text-white text-4xl">Welcome !!! </h3>
+          <h3 className="text-white text-4xl">Welcome <span>{user?.fullName?user?.fullName:"!!!!"}</span> </h3>
         </div>
         <nav>
           {showLogin && (

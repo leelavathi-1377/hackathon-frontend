@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 const LoginForm = () => {
   const {
     register,
@@ -10,14 +12,32 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
+  const {setUser,setIsAuthenticated}=useAuth()
+
   const navigate=useNavigate()
 
-  console.log('error',errors)
-  const onSubmit=(data)=>{
-    console.log('data',data);
-    navigate('/dashboard')
+  const onSubmit = async (data) => {
+    console.log("data", data);
+    try {
+      const response = await axios.post(
+        "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/login",
+        data
+      );
+      console.log("response", response.data);
+      if (response.status === 200) {
+        setUser(response.data)
+        localStorage.setItem("email", response.data.email);
+        setIsAuthenticated(true)
+        
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+      alert("Invalid username or password");
+    }
+  };
 
-  }
+  console.log('error',errors)
   return (
     <div>
       <section class="bg-gray-50 dark:bg-gray-900">
