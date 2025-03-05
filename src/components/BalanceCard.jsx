@@ -35,7 +35,7 @@ const BalanceCard = () => {
           <div className="text-center bg-white  text-[#11b67a]">
             <h1 className="text-xl font-bold">
               Current Balance{" "}
-              <span className="text-3xl font-medium">{user?.balance}</span>
+              <span className="text-3xl font-medium"> ₹ {user?.balance}</span>
             </h1>
           </div>
 

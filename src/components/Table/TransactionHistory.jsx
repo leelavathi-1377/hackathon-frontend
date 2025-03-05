@@ -3,13 +3,15 @@ import transactions from "../mock/transactionhistory.json";
 import axios from "axios";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
 const TransactionTable = () => {
   const [transactions, setTransactions] = useState([]);
+  const { user } = useAuth();
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
         const response = await axios.get(
-          "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/transactions/getAllTransactions"
+          "/api/transactions/getAllTransactions"
         );
         console.log("resp", response);
         if (response.status == 200) {
@@ -20,7 +22,7 @@ const TransactionTable = () => {
       }
     };
     fetchTransactions();
-  }, []);
+  }, [user]);
 
   console.log(transactions);
 

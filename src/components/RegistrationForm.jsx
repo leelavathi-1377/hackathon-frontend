@@ -10,25 +10,19 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-  
   const onSubmit = async (data) => {
     console.log("data", data);
-    const registerPayload=parseUserData(data);
+    const registerPayload = parseUserData(data);
     try {
-      const response = await axios.post(
-        "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/register",
-        registerPayload
-      );
+      const response = await axios.post("/api/users/register", registerPayload);
       console.log("response", response.data);
       if (response.data) {
-      
-        navigate("/dashboard");
+        navigate("/login");
       }
     } catch (error) {
       console.error("Registration failed", error);
-      
     }
   };
 
@@ -41,14 +35,18 @@ const RegistrationForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           {/* Personal Information */}
           <section>
-            <h3 className="text-xl font-semibold mb-4">1. Personal Information</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              1. Personal Information
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="font-semibold">Full Name</label>
                 <input
                   className="border p-2 rounded w-full mt-1"
                   placeholder="Full Name"
-                  {...register("personalInformation.fullName", { required: true })}
+                  {...register("personalInformation.fullName", {
+                    required: true,
+                  })}
                 />
               </div>
               <div>
@@ -124,7 +122,9 @@ const RegistrationForm = () => {
                 <input
                   className="border p-2 rounded w-full"
                   placeholder="country"
-                  {...register("contactInformation.country", { required: true })}
+                  {...register("contactInformation.country", {
+                    required: true,
+                  })}
                 />
               </div>
               <div>
@@ -140,7 +140,9 @@ const RegistrationForm = () => {
                 <input
                   className="border p-2 rounded w-full"
                   placeholder="ZipCode"
-                  {...register("contactInformation.zipcode", { required: true })}
+                  {...register("contactInformation.zipcode", {
+                    required: true,
+                  })}
                 />
               </div>
             </div>
@@ -154,7 +156,9 @@ const RegistrationForm = () => {
                 <label className="font-semibold">Account Type</label>
                 <select
                   className="border p-2 rounded w-full mt-1"
-                  {...register("accountDetails.accountType", { required: true })}
+                  {...register("accountDetails.accountType", {
+                    required: true,
+                  })}
                 >
                   <option>Savings</option>
                   <option>Current</option>
@@ -166,17 +170,19 @@ const RegistrationForm = () => {
                 <input
                   className="border p-2 rounded w-full"
                   placeholder="Initial Balance"
-                  {...register("accountDetails.initialBalance", { required: true })}
+                  {...register("accountDetails.initialBalance", {
+                    required: true,
+                  })}
                 />
-               
               </div>
-              
             </div>
           </section>
 
           {/* Security & Login Details */}
           <section>
-            <h3 className="text-xl font-semibold mb-4">4. Security & Login Details</h3>
+            <h3 className="text-xl font-semibold mb-4">
+              4. Security & Login Details
+            </h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="font-semibold">Username</label>
@@ -204,11 +210,8 @@ const RegistrationForm = () => {
                   {...register("security.confirmPassword", { required: true })}
                 />
               </div>
-             
             </div>
           </section>
-
-         
 
           {/* Submit Button */}
           <div className="flex justify-end">
@@ -220,7 +223,6 @@ const RegistrationForm = () => {
             </button>
           </div>
         </form>
-
       </div>
     </div>
   );

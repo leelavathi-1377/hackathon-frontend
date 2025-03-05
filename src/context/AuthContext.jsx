@@ -12,7 +12,7 @@ export default function AuthProvider({ children }) {
   const [loading, setIsLoading] = useState(true);
 
   const getUserDetails = async (email) => {
-    const Url = `http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/getUser/${email}`;
+    const Url = `/api/users/getUser/${email}`;
 
     try {
       const result = await axios.get(Url);
@@ -42,6 +42,10 @@ export default function AuthProvider({ children }) {
     fetchUserDetails();
   }, []);
 
+  const onRefresh = (email) => {
+    getUserDetails(email);
+  };
+
   const logout = () => {
     console.log("calling");
     localStorage.removeItem("email");
@@ -58,6 +62,7 @@ export default function AuthProvider({ children }) {
         setIsAuthenticated,
         logout,
         loading,
+        onRefresh,
       }}
     >
       {children}

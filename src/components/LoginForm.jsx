@@ -12,23 +12,20 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const {setUser,setIsAuthenticated}=useAuth()
+  const { setUser, setIsAuthenticated } = useAuth();
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("data", data);
     try {
-      const response = await axios.post(
-        "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/users/login",
-        data
-      );
+      const response = await axios.post("/api/users/login", data);
       console.log("response", response.data);
       if (response.status === 200) {
-        setUser(response.data)
+        setUser(response.data);
         localStorage.setItem("email", response.data.email);
-        setIsAuthenticated(true)
-        
+        setIsAuthenticated(true);
+
         navigate("/dashboard");
       }
     } catch (error) {
@@ -37,7 +34,7 @@ const LoginForm = () => {
     }
   };
 
-  console.log('error',errors)
+  console.log("error", errors);
   return (
     <div>
       <section class="bg-gray-50 dark:bg-gray-900">
@@ -47,7 +44,10 @@ const LoginForm = () => {
               <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)} >
+              <form
+                class="space-y-4 md:space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div>
                   <label
                     for="username"
@@ -58,11 +58,15 @@ const LoginForm = () => {
                   <input
                     type="text"
                     id="username"
-                    {...register("username", { required: "username is required" })}
+                    {...register("username", {
+                      required: "username is required",
+                    })}
                     class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
                   />
-                  {errors.username && <p className="text-red-700">{errors.username.message}</p>}
+                  {errors.username && (
+                    <p className="text-red-700">{errors.username.message}</p>
+                  )}
                 </div>
                 <div>
                   <label
@@ -75,13 +79,17 @@ const LoginForm = () => {
                     type="password"
                     name="password"
                     id="password"
-                    {...register("password", { required: "password is required"})}
+                    {...register("password", {
+                      required: "password is required",
+                    })}
                     class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
                   />
-                   {errors.password && <p className="text-red-700">{errors.password.message}</p>}
+                  {errors.password && (
+                    <p className="text-red-700">{errors.password.message}</p>
+                  )}
                 </div>
-               
+
                 <button
                   type="submit"
                   class="w-full bg-blue-600 text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"

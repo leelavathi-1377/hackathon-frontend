@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "http://ec2-3-7-71-6.ap-south-1.compute.amazonaws.com:8080/api/:splat"
+  status = 200
+  force = true  # Ensure the redirect applies even if other rules exist
