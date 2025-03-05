@@ -1,11 +1,10 @@
 import React from "react";
-import transactions from "../mock/transactionhistory.json";
 import axios from "axios";
 import { Link } from "react-router";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 const TransactionTable = () => {
-  const [transactions, setTransactions] = useState([]);
+  let [transactions, setTransactions] = useState([]);
   const { user } = useAuth();
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -13,9 +12,9 @@ const TransactionTable = () => {
         const response = await axios.get(
           "/api/transactions/getAllTransactions"
         );
-        console.log("resp", response);
         if (response.status == 200) {
-          setTransactions(response.data);
+          const sortedTransactions = [...response.data].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+          setTransactions(sortedTransactions);
         }
       } catch (err) {
         console.error("error occurred fetching transactions", err.message);
@@ -23,8 +22,6 @@ const TransactionTable = () => {
     };
     fetchTransactions();
   }, [user]);
-
-  console.log(transactions);
 
   return (
     <section className="mt-10 w-[80%] mx-auto">
