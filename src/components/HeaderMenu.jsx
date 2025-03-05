@@ -30,7 +30,7 @@ const HeaderMenu = () => {
     <header className="bg-[#11b67a] min-h-[100px]">
       <div className="max-w-[90%] p-4 flex justify-between items-center">
         <div>
-          <h2 className="text-white text-4xl p-4">Bank of Bengal</h2>
+          <h2 className="text-white text-4xl p-4">LTC Bank</h2>
         </div>
         <div>
           <h3 className="text-white text-4xl">

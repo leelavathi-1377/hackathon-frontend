@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
       <section className="text-center py-10">
-        <h1 className="text-5xl font-bold mb-4">Welcome to Bank of Bengal </h1>
+        <h1 className="text-5xl font-bold mb-4">Welcome to LTC Bank</h1>
         <p className="text-lg mb-6">
           Your Trust, Our Commitment. Banking Made Simple!
         </p>
