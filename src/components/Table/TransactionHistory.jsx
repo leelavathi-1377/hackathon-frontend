@@ -27,7 +27,7 @@ const TransactionTable = () => {
   console.log(transactions);
 
   return (
-    <section className="mt-10 w-[80%] mx-auto">
+    <section className="mt-10 w-[85%] mx-auto">
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
         Transactions History
       </h2>
@@ -39,6 +39,9 @@ const TransactionTable = () => {
               <th className="py-3 px-6 text-left">To Account</th>
               <th className="py-3 px-6 text-left">Transaction ID</th>
               <th className="py-3 px-6 text-left">Amount</th>
+              <th className="py-3 px-6 text-left">Sender Acct Info</th>
+              <th className="py-3 px-6 text-left">Receiver Acct Info</th>
+              <th className="py-3 px-6 text-left">Stable Coin</th>
               <th className="py-3 px-6 text-left">Transaction Type</th>
             </tr>
           </thead>
@@ -55,10 +58,31 @@ const TransactionTable = () => {
                     to={`./${transaction.transactionId}`}
                     className="block py-4 px-6 text-blue-600 hover:text-blue-800 hover:underline cursor-pointer transition duration-300"
                   >
-                    <td className="py-4 px-6">{transaction.id}</td>
+                    <td className="py-4 px-6">{transaction.transactionId}</td>
                   </Link>
                   <td className="py-4 px-6 font-bold text-blue-600">
-                    ${transaction.amount}
+                    £{transaction.amount}
+                  </td>
+                  <td className="py-4 px-6 font-bold text-blue-400 text-sm">
+                    <a href={transaction.blockChainSenderLink} target="_blank">
+                      Sender Details
+                    </a>
+                  </td>
+                  <td className="py-4 px-6 font-bold text-blue-400 text-sm">
+                    <a
+                      href={transaction.blockChainReceiverLink}
+                      target="_blank"
+                    >
+                      Receiver Details
+                    </a>
+                  </td>
+                  <td className="py-4 px-6 font-bold text-blue-400 text-sm">
+                    <a
+                      href={transaction.blockChaonStableCoinLink}
+                      target="_blank"
+                    >
+                      Stable Coin Details
+                    </a>
                   </td>
                   <td
                     className={`py-4 px-6 ${
