@@ -19,6 +19,7 @@ const RegistrationForm = () => {
       const response = await axios.post("/api/users/register", registerPayload);
       console.log("response", response.data);
       if (response.data) {
+        alert('Registration sucessfull')
         navigate("/login");
       }
     } catch (error) {

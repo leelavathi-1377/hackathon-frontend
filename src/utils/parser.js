@@ -22,6 +22,8 @@ export function parseUserData(data) {
     return {
         toAccountId:data.accountId,
         amount:data.amount,
+        fromCurrency:data.fromCurrency,
+        toCurrency:data.toCurrency
         
     }
   }

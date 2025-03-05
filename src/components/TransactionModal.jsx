@@ -15,12 +15,14 @@ export const TransactionModal = ({ isOpen, onClose }) => {
   const { user, onRefresh } = useAuth();
 
   const saveTranferDetails = async (data) => {
-    const transferPayload = parseTransferData(data);
+    const transferParsePayload = parseTransferData(data);
+    const transferPayload={
+      ...transferParsePayload,
+      fromAccountId: user.accountNumber,
+    };
+    console.log('payload',transferPayload)
     try {
-      const response = await axios.post("/api/transactions/transfer", {
-        ...transferPayload,
-        fromAccountId: user.accountNumber,
-      });
+      const response = await axios.post("/api/transactions/transfer",transferPayload );
       console.log("response", response.data);
       if (response.status === 200) {
         alert("Transfer Successful");
@@ -76,6 +78,32 @@ export const TransactionModal = ({ isOpen, onClose }) => {
               className="w-full mt-1 p-2 border rounded-md"
             />
           </div>
+          <div>
+                <label className="font-semibold">From Currency </label>
+                <select
+                  className="border p-2 rounded w-full mt-1"
+                  {...register("fromCurrency")}
+                >
+                  <option>GPB</option>
+                  <option>EURO</option>
+                  <option>INR</option>
+                  <option>USD</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-semibold">To Currency </label>
+                <select
+                  className="border p-2 rounded w-full mt-1"
+                  {...register("toCurrency")}
+                >
+                  <option>GPB</option>
+                  <option>EURO</option>
+                  <option>INR</option>
+                  <option>USD</option>
+                </select>
+              </div>
+          
           <div className="flex justify-end gap-4 mt-10">
             <button
               type="button"
